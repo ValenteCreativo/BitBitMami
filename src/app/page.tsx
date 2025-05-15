@@ -1,103 +1,86 @@
+"use client";
+
+import { FaWallet } from "react-icons/fa";
 import Image from "next/image";
+import GardenScene from "./components/GardenScene";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="relative min-h-screen font-sans text-[#0F9D91] overflow-hidden">
+      <GardenScene zoom={0} />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Connect Wallet in corner */}
+      <div className="fixed top-6 right-6 z-20 animate-fade-in">
+        <button className="flex items-center gap-2 px-5 py-2 bg-[#D4AF37] text-white rounded-full shadow hover:brightness-110 transition text-sm md:text-base">
+          <FaWallet /> Connect Wallet
+        </button>
+      </div>
+
+      {/* Fixed Logo */}
+      <div className="fixed top-54 left-1/2 -translate-x-1/2 z-10 animate-fade-in">
+        <Image
+          src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiahw6fgrdxyv2ncbv5ntbszxt6bmioajbaxc45xcs6idzouv2evf4"
+          alt="BitBitMami Logo"
+          width={180}
+          height={180}
+          className="rounded-full border-4 border-[#D4AF37] shadow-2xl"
+        />
+      </div>
+
+      <div className="mt-30" />
+
+      {/* Overlay content */}
+      <div className="relative z-10 flex flex-col items-center justify-start min-h-screen text-center px-6 pt-[370px] pb-20 animate-fade-in-slow">
+        <div className="mt-12" />
+
+        <p className="text-lg md:text-xl text-[#3DB8A0] max-w-2xl leading-relaxed mb-20 bg-white/85 px-8 py-5 rounded-xl shadow-lg backdrop-blur-xl transition-all duration-700 ease-out">
+          Follow the white rabbit 🐇 into your own wonderland — An empowering tool to plan savings, get paid in Bitcoin, connect with business, and grow your legacy.
+        </p>
+
+        <div className="flex flex-wrap justify-center gap-6 max-w-4xl mb-20">
+          {[
+            { title: "Savings Plan", url: "/software/savings" },
+            { title: "Learn Bitcoin", url: "/software/learn" },
+            { title: "Circular Economy", url: "/software/networking" },
+            { title: "Send / Receive", url: "/software/send" },
+          ].map((link, index) => (
+            <Link key={index} href={link.url}>
+              <button className="px-8 py-4 rounded-full bg-[#3DB8A0] text-white font-semibold text-lg shadow-lg hover:bg-[#0F9D91] hover:shadow-xl hover:brightness-105 transition-all duration-300 ease-in-out">
+                {link.title}
+              </button>
+            </Link>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+       
+        {/* Footer */}
+        <footer className="text-sm text-[#00747A] opacity-80">
+          From México with love <span className="text-[#D4AF37]">❤</span> — open source at{' '}
+          <a
+            href="https://github.com/ValenteCreativo/bitbitmami"
+            className="underline hover:text-[#0F9D91]"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+        </footer>
+      </div>
+
+      {/* Animations */}
+      <style jsx global>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fade-in 1s ease-out forwards;
+        }
+        .animate-fade-in-slow {
+          animation: fade-in 1.8s ease-out forwards;
+        }
+      `}</style>
+    </main>
   );
 }
