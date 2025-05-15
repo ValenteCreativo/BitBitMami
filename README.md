@@ -84,7 +84,7 @@ Visit: http://localhost:3000
 
 -- Project management: Mariana Toledano
 
--- Business Development: Cristina
+-- Business Development: Cristina Zaragoza
 
 -- Design & UX: Verónica Mafud
 
