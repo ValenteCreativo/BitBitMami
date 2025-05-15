@@ -56,16 +56,13 @@ BitBitMami is a **gentle yet powerful onboarding journey** into the Bitcoin ecos
 
 ```bash
 
-   git clone https://github.com/ValenteCreativo/bitbitmami.git
-   cd bitbitmami
+git clone https://github.com/ValenteCreativo/bitbitmami.git
+cd bitbitmami
 
 Install dependencies
 
 npm install
 Run locally
-
-```bash
-Copiar
 npm run dev
 Visit: http://localhost:3000
 
@@ -85,10 +82,13 @@ Visit: http://localhost:3000
 ## 🙌 Team
 **Made from México with love 🇲🇽**
 
-**Project management: Mariana Toledano**
-**Business Development: Cristina**
-**Design & UX: Verónica Mafud**
-**Full Stack Development: Valentín Martínez**
+-- Project management: Mariana Toledano
+
+-- Business Development: Cristina
+
+-- Design & UX: Verónica Mafud
+
+-- Full Stack Development: Valentín Martínez
 
 
 **Design, code & ideas: 100% community-aligned.**
