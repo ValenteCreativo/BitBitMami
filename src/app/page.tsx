@@ -20,7 +20,7 @@ export default function Home() {
       {/* Fixed Logo */}
       <div className="fixed top-54 left-1/2 -translate-x-1/2 z-10 animate-fade-in">
         <Image
-          src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiahw6fgrdxyv2ncbv5ntbszxt6bmioajbaxc45xcs6idzouv2evf4"
+          src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiefgcssizawt255mjjqaced3qn7scseiylpnqrmfboma4f7i5gjeu"
           alt="BitBitMami Logo"
           width={180}
           height={180}

@@ -33,7 +33,7 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, theme = 'spring' }) => 
 
     camera.position.set(0, 45, 100);
     camera.lookAt(0, 0, 0);
-    
+
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mount.appendChild(renderer.domElement);
@@ -97,15 +97,15 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, theme = 'spring' }) => 
 
     const seasonalGroup = new THREE.Group();
     const petalThemes: Record<string, number[]> = {
-      spring: [0xffb6c1, 0xfadadd, 0xffe1f0],
-      summer: [0xffd700, 0xffa07a, 0xffdab9],
-      fall: [0xd4af37, 0xff8c00, 0xcd853f],
-      winter: [0xe0f7fa, 0xd0f0ff, 0xb0c4de],
-      night: [0x0f9d91, 0x3db8a0, 0x00747a]
+      spring: [0x77dd77, 0xffc0cb, 0xb39ddb],
+      summer: [0xa8e6cf, 0x3db8a0, 0x00c2cb],
+      fall: [0xd2691e, 0xcd5c5c, 0x8b0000],
+      winter: [0xd0f0ff, 0xa3cde3, 0xe0f7fa],
+      night: [0x0f1b4c, 0x00747a, 0x3db8a0]
     };
 
     const colors = petalThemes[theme] ?? petalThemes.spring;
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 40; i++) {
       const petal = new THREE.Mesh(
         new THREE.CircleGeometry(0.5, 6),
         new THREE.MeshBasicMaterial({
@@ -200,11 +200,11 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, theme = 'spring' }) => 
     };
 
     const palettes: Record<string, string[]> = {
-      spring: ["#0f9d91", "#3db8a0", "#00747a", "#d4af37"],
-      summer: ["#fff7e0", "#ffe0b2", "#ffd580"],
-      fall: ["#f5deb3", "#d4af37", "#f0c987"],
-      winter: ["#d0f0ff", "#e0f7fa", "#f0ffff"],
-      night: ["#0f9d91", "#3db8a0", "#00747a"]
+      spring: ["#77dd77", "#ffc0cb", "#b39ddb", "#d4af37"],
+      summer: ["#a8e6cf", "#3db8a0", "#00c2cb", "#c2f970", "#d7fcd4", "#f5fff0"],
+      fall: ["#d2691e", "#cd5c5c", "#8b0000", "#f0c987"],
+      winter: ["#d0f0ff", "#b5e6f7", "#ffffff", "#ccf2ff", "#a7dbf7", "#8ecff9"],
+      night: ["#0f1b4c", "#00747a", "#3db8a0", "#000000"]
     };
     const palette = palettes[theme] || palettes.spring;
     for (let i = 0; i < palette.length; i++) {

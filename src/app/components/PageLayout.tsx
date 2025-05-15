@@ -44,7 +44,7 @@ export default function PageLayout({ children }: { children: ReactNode }) {
       {!hideLogo && (
         <div className="fixed top-54 left-1/2 -translate-x-1/2 z-20 animate-fade-in transition-opacity duration-500">
           <Image
-            src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiahw6fgrdxyv2ncbv5ntbszxt6bmioajbaxc45xcs6idzouv2evf4"
+            src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiefgcssizawt255mjjqaced3qn7scseiylpnqrmfboma4f7i5gjeu"
             alt="BitBitMami Logo"
             width={180}
             height={180}
