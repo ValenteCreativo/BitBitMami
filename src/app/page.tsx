@@ -35,7 +35,7 @@ export default function Home() {
         <div className="mt-12" />
 
         <p className="text-lg md:text-xl text-[#3DB8A0] max-w-2xl leading-relaxed mb-20 bg-white/85 px-8 py-5 rounded-xl shadow-lg backdrop-blur-xl transition-all duration-700 ease-out">
-          Follow the white rabbit 🐇 into your own wonderland — An empowering tool to plan savings, get paid in Bitcoin, connect with business, and grow your legacy.
+        Follow the white rabbit 🐇 into your own wonderland — A gateway to plan your savings, get paid in Bitcoin, exchange with others in a living economy, and grow your legacy.
         </p>
 
         <div className="flex flex-wrap justify-center gap-6 max-w-4xl mb-20">
