@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐇 BitBitMami
 
-## Getting Started
+**A Bitcoin-native toolkit to strengthen local circular economies through saving, learning, collaboration, and real-world payments.**  
 
-First, run the development server:
+Built for the **Bitcoin 2025 Official Hackathon** using sBTC (Stacks), Rebar Shield, and Rebar Data.
+
+![BitBitMami Logo](https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiahw6fgrdxyv2ncbv5ntbszxt6bmioajbaxc45xcs6idzouv2evf4)
+
+---
+
+## 🌱 Problem
+
+Bitcoin is global — but its adoption often leaves out **small-scale entrepreneurs**, especially women and local businesses.  
+There’s a lack of simple, elegant tools to **plan, receive, and use Bitcoin** in a real-life context.
+
+---
+
+## 🌸 Vision
+
+BitBitMami is a **gentle yet powerful onboarding journey** into the Bitcoin ecosystem — designed as a visual toolkit for:
+
+- 👛 Planning your savings in Bitcoin
+- 📚 Learning interactively about how Bitcoin works
+- 🛍️ Joining a circular network of women-led businesses
+- 📲 Sending and receiving BTC with optional privacy
+
+---
+
+## ✨ Features
+
+| Module | Description |
+|--------|-------------|
+| **Savings Plan** | Visual tracker for goals using sBTC and programmable releases |
+| **Learn Bitcoin** | Interactive guides + real-time charts using Rebar Data |
+| **Entrepreneur Network** | Directory of businesses that accept Bitcoin (verified) |
+| **Send / Receive** | BTC transactions with optional **Rebar Shield** integration |
+| **Circular Insights** | Future dashboard for local BTC economic flows |
+
+---
+
+## 🧠 Tech Stack
+
+- 🌳 **Next.js 14 + App Router**
+- 🧩 **Three.js + Custom GardenScene** for emotional UI
+- 💸 **Stacks SDK** for sBTC savings logic
+- 🛡️ **Rebar Shield** for private transactions
+- 📊 **Rebar Data** for Bitcoin analytics and learning
+- 📍 **Leaflet + Recharts** (planned) for map and graph visualizations
+- 🎨 TailwindCSS for aesthetic coherence
+
+---
+
+## 🛠️ Local Development
+
+1. **Clone the repo**
 
 ```bash
+
+   git clone https://github.com/ValenteCreativo/bitbitmami.git
+   cd bitbitmami
+
+Install dependencies
+
+npm install
+Run locally
+
+```bash
+Copiar
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Visit: http://localhost:3000
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Future Features (post-Hackathon)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-- 🌍 Map-based visualization of the network (Leaflet.js)
 
-## Learn More
+-- 🧠 AI chatbot for Bitcoin education
 
-To learn more about Next.js, take a look at the following resources:
+-- 🪙 Tokenless reputation system
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-- 📱 PWA mobile support for field usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🙌 Team
+**Made from México with love 🇲🇽**
 
-## Deploy on Vercel
+**Project management: Mariana Toledano**
+**Business Development: Cristina**
+**Design & UX: Verónica Mafud**
+**Full Stack Development: Valentín Martínez**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Design, code & ideas: 100% community-aligned.**
+
+## Open source and open heart.
+
+
+## 📜 License
+MIT — Use it, remix it, help communities thrive 🌱
