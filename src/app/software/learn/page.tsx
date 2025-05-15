@@ -6,7 +6,7 @@ import PageLayout from "../../components/PageLayout";
 export default function LearnPage() {
   return (
     <>
-      <GardenScene zoom={0} view="learn" theme="summer" />
+      <GardenScene zoom={0} theme="summer" />
       <PageLayout>
       <div className="mt-40" />
         <h1 className="text-3xl md:text-4xl font-bold text-[#00747a] mb-6">Learn Bitcoin</h1>

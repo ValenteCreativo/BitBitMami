@@ -1,5 +1,3 @@
-// GardenScene.tsx
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -7,11 +5,10 @@ import * as THREE from "three";
 
 export type GardenSceneProps = {
   zoom: number;
-  view?: 'main' | 'savings' | 'learn' | 'network' | 'send' | 'insights';
   theme?: 'spring' | 'summer' | 'fall' | 'winter' | 'night';
 };
 
-const GardenScene: React.FC<GardenSceneProps> = ({ zoom, view = 'main', theme = 'spring' }) => {
+const GardenScene: React.FC<GardenSceneProps> = ({ zoom, theme = 'spring' }) => {
   const mountRef = useRef<HTMLDivElement | null>(null);
   const zoomRef = useRef<number>(zoom);
   const [sceneReady, setSceneReady] = useState(false);
@@ -24,27 +21,30 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, view = 'main', theme = 
     const mount = mountRef.current;
     if (!mount) return;
 
-    const scene = new THREE.Scene();
+    let scene: THREE.Scene;
+    let camera: THREE.PerspectiveCamera;
+    let renderer: THREE.WebGLRenderer;
+    let frameId: number;
+
+    scene = new THREE.Scene();
     const backgroundTexture = new THREE.CanvasTexture(generateAquarelleTextureWithPaper(theme));
     backgroundTexture.wrapS = THREE.RepeatWrapping;
     backgroundTexture.wrapT = THREE.RepeatWrapping;
-    backgroundTexture.repeat.set(1, 1);
     scene.background = backgroundTexture;
 
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 45, 100);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mount.appendChild(renderer.domElement);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
-    const sunLight = new THREE.DirectionalLight(0xffffff, 0.25);
-    sunLight.position.set(0, 50, 50);
-    sunLight.castShadow = true;
-    scene.add(ambientLight, sunLight);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
+    directionalLight.position.set(0, 50, 50);
+    scene.add(ambientLight, directionalLight);
 
     const trunk = new THREE.Mesh(
       new THREE.CylinderGeometry(1.2, 1.8, 15, 32),
@@ -89,15 +89,16 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, view = 'main', theme = 
     );
     ground.rotation.x = -Math.PI / 2;
     ground.position.y = -8;
-    for (let i = 0; i < ground.geometry.attributes.position.count; i++) {
+
+    const pos = ground.geometry.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
       const y = Math.sin(i / 5) * 0.5;
-      ground.geometry.attributes.position.setY(i, y);
+      pos.setY(i, y);
     }
     ground.geometry.computeVertexNormals();
     scene.add(ground);
 
     const seasonalGroup = new THREE.Group();
-
     const petalThemes: Record<string, number[]> = {
       spring: [0xffb6c1, 0xfadadd, 0xffe1f0],
       summer: [0xffd700, 0xffa07a, 0xffdab9],
@@ -106,23 +107,20 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, view = 'main', theme = 
       night: [0x0f9d91, 0x3db8a0, 0x00747a]
     };
 
-    if (petalThemes[theme]) {
-      const colors = petalThemes[theme];
-      for (let i = 0; i < 100; i++) {
-        const petal = new THREE.Mesh(
-          new THREE.CircleGeometry(0.5, 6),
-          new THREE.MeshBasicMaterial({
-            color: colors[Math.floor(Math.random() * colors.length)],
-            transparent: true,
-            opacity: 0.4,
-            side: THREE.DoubleSide,
-          })
-        );
-        petal.position.set((Math.random() - 0.5) * 120, Math.random() * 30 + 5, (Math.random() - 0.5) * 120);
-        petal.rotation.x = Math.random() * Math.PI;
-        petal.rotation.y = Math.random() * Math.PI;
-        seasonalGroup.add(petal);
-      }
+    const colors = petalThemes[theme] ?? petalThemes.spring;
+    for (let i = 0; i < 80; i++) {
+      const petal = new THREE.Mesh(
+        new THREE.CircleGeometry(0.5, 6),
+        new THREE.MeshBasicMaterial({
+          color: colors[Math.floor(Math.random() * colors.length)],
+          transparent: true,
+          opacity: 0.35,
+          side: THREE.DoubleSide,
+        })
+      );
+      petal.position.set((Math.random() - 0.5) * 120, Math.random() * 30 + 5, (Math.random() - 0.5) * 120);
+      petal.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      seasonalGroup.add(petal);
     }
     scene.add(seasonalGroup);
 
@@ -138,10 +136,9 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, view = 'main', theme = 
 
     const clock = new THREE.Clock();
     const animate = () => {
-      requestAnimationFrame(animate);
+      frameId = requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
 
-      camera.lookAt(0, 0, 0);
       leaves.rotation.y += 0.0015;
       seasonalGroup.children.forEach((child, idx) => {
         child.rotation.z += 0.001 * (idx + 1);
@@ -152,7 +149,6 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, view = 'main', theme = 
       butterfly.position.set(Math.sin(t) * 22, Math.sin(t * 2) * 4 - 0.5, Math.cos(t) * 21);
       butterfly.rotation.y = t * 0.2;
 
-      if (!sceneReady) setSceneReady(true);
       renderer.render(scene, camera);
     };
     animate();
@@ -164,9 +160,12 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, view = 'main', theme = 
     };
     window.addEventListener("resize", handleResize);
 
+    setSceneReady(true);
+
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", onMouseMove);
+      cancelAnimationFrame(frameId);
       if (mount.firstChild) mount.removeChild(mount.firstChild);
     };
   }, [theme]);
@@ -182,10 +181,10 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, view = 'main', theme = 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.globalAlpha = 0.2;
 
-    for (let i = 0; i < 7000; i++) {
+    for (let i = 0; i < 5000; i++) {
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height;
-      const r = Math.random() * 1.6;
+      const r = Math.random() * 1.4;
       ctx.fillStyle = `rgba(0, 0, 0, ${Math.random() * 0.1})`;
       ctx.beginPath();
       ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -203,17 +202,16 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, view = 'main', theme = 
       ctx.fill();
     };
 
-    const colorPalettes: Record<string, string[]> = {
+    const palettes: Record<string, string[]> = {
       spring: ["#0f9d91", "#3db8a0", "#00747a", "#d4af37"],
-      summer: ["#fef3c7", "#fff7e0", "#ffebd6", "#ffd580"],
+      summer: ["#fff7e0", "#ffe0b2", "#ffd580"],
       fall: ["#f5deb3", "#d4af37", "#f0c987"],
       winter: ["#d0f0ff", "#e0f7fa", "#f0ffff"],
       night: ["#0f9d91", "#3db8a0", "#00747a"]
     };
-
-    const palette = colorPalettes[theme] || colorPalettes.spring;
+    const palette = palettes[theme] || palettes.spring;
     for (let i = 0; i < palette.length; i++) {
-      splotch(100 + i * 80, 120 + i * 40, 120 - i * 10, palette[i]);
+      splotch(100 + i * 80, 120 + i * 40, 100 - i * 15, palette[i]);
     }
 
     return canvas;
@@ -230,7 +228,8 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, view = 'main', theme = 
         height: "100%",
         zIndex: -1,
         opacity: sceneReady ? 1 : 0,
-        transition: "opacity 0.4s ease-out"
+        transition: "opacity 0.5s ease-out",
+        pointerEvents: "none",
       }}
     />
   );
