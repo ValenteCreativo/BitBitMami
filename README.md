@@ -1,6 +1,6 @@
 # 🐇 BitBitMami
 
-**A Bitcoin-native toolkit to strengthen local circular economies through saving, learning, collaboration, and real-world payments.**  
+**A Bitcoin-native toolkit to strengthen local circular economies through savings, education, collaboration, and real-world payments.**  
 
 Built for the **Bitcoin 2025 Official Hackathon** using sBTC (Stacks), Rebar Shield, and Rebar Data.
 
