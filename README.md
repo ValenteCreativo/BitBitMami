@@ -4,7 +4,7 @@
 
 Built for the **Bitcoin 2025 Official Hackathon** using sBTC (Stacks), Rebar Shield, and Rebar Data.
 
-![BitBitMami Logo](https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiefgcssizawt255mjjqaced3qn7scseiylpnqrmfboma4f7i5gjeu)
+![BitBitMami Logo](https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafybeiarejffeclu5prnvmtcbnb2v4dpdvqgx5j5nge27m25yja2pbsmja)
 
 ---
 
