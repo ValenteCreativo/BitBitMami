@@ -37,7 +37,7 @@ export default function Home() {
         }}
       >
         <Image
-          src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreihts545y5mwvweiaa5rfptypnf4rzvi66dytpfsi2wucfzyifqwvq"
+          src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiefgcssizawt255mjjqaced3qn7scseiylpnqrmfboma4f7i5gjeu"
           alt="BitBitMami Logo"
           width={180}
           height={180}
