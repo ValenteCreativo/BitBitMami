@@ -13,7 +13,7 @@ export default function SendReceivePage() {
             Send / Receive Bitcoin
           </h1>
 
-          <p className="text-lg md:text-xl text-[#3db8a0] max-w-2xl mx-auto leading-relaxed bg-white/70 px-6 py-4 rounded-xl shadow-md backdrop-blur-md">
+          <p className="text-lg md:text-xl text-[#3db8a0] max-w-2xl mx-auto leading-relaxed bg-white/80 px-6 py-4 rounded-xl shadow-md">
             Easily send and receive Bitcoin payments. Whether you&rsquo;re paying for services... getting paid for your work, or just splitting a bill—
             BitBitMami makes it seamless and secure.
           </p>

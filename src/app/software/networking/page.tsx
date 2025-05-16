@@ -13,7 +13,7 @@ export default function NetworkingPage() {
             Entrepreneur Network
           </h1>
 
-          <p className="text-lg md:text-xl text-[#3db8a0] max-w-2xl mx-auto leading-relaxed bg-white/70 px-6 py-4 rounded-xl shadow-md backdrop-blur-md">
+          <p className="text-lg md:text-xl text-[#3db8a0] max-w-2xl mx-auto leading-relaxed bg-white/80 px-6 py-4 rounded-xl shadow-md">
             Join a curated network of entrepreneurs and local businesses that accept Bitcoin.
             Discover, connect, and grow your impact through real-world collaboration.
           </p>

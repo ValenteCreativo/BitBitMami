@@ -1,23 +1,40 @@
-// src/app/Home.tsx
-"use client"
+"use client";
 
-import Wallet from "./components/Wallet"; // Importar el nuevo componente Wallet
+import Wallet from "./components/Wallet";
 import Image from "next/image";
 import GardenScene from "./components/GardenScene";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const hideLogo = scrollY > 120;
+
   return (
     <main className="relative min-h-screen font-sans text-[#0F9D91] overflow-hidden">
       <GardenScene zoom={0} />
 
-      
-      <Wallet />
+      {/* Wallet en fixed para no interferir con scroll/layout */}
+      <div className="fixed top-6 right-6 z-[120] pointer-events-auto">
+        <Wallet />
+      </div>
 
-      
+      {/* Logo central con fade + scale */}
       <div
-        className="fixed top-[22%] left-1/2 -translate-x-1/2 z-10 transition-opacity duration-500 ease-out pointer-events-none"
-        style={{ opacity: 1 }}
+        className="fixed top-[22%] left-1/2 -translate-x-1/2 z-10 transition-all duration-500 ease-out pointer-events-none"
+        style={{
+          opacity: hideLogo ? 0 : 1,
+          transform: hideLogo ? "scale(0.95)" : "scale(1)",
+          transition: "opacity 0.5s ease, transform 0.5s ease",
+          willChange: "opacity, transform",
+        }}
       >
         <Image
           src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiefgcssizawt255mjjqaced3qn7scseiylpnqrmfboma4f7i5gjeu"
@@ -49,9 +66,8 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Footer */}
         <footer className="text-sm text-[#00747A] opacity-80">
-          From México with love <span className="text-[#D4AF37]">❤</span> — open source at{' '}
+          From México with love <span className="text-[#D4AF37]">❤</span> — open source at{" "}
           <a
             href="https://github.com/ValenteCreativo/bitbitmami"
             className="underline hover:text-[#0F9D91]"
@@ -63,7 +79,6 @@ export default function Home() {
         </footer>
       </div>
 
-      {/* Animations */}
       <style jsx global>{`
         @keyframes fade-in {
           from {

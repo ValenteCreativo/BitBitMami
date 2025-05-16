@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import PageLayout from "@/app/components/PageLayout";
 import GardenScene from "@/app/components/GardenScene";
@@ -13,7 +13,7 @@ export default function SavingsPage() {
             Savings Plan
           </h1>
 
-          <p className="text-lg md:text-xl text-[#3db8a0] max-w-2xl mx-auto leading-relaxed bg-white/70 px-6 py-4 rounded-xl shadow-md backdrop-blur-md">
+          <p className="text-lg md:text-xl text-[#3db8a0] max-w-2xl mx-auto leading-relaxed bg-white/70 px-6 py-4 rounded-xl shadow-md">
             Set your Bitcoin savings goals and follow your path step by step.
             Track progress, get rewarded, and feel confident about your financial journey.
           </p>

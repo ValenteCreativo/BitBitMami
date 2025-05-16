@@ -103,8 +103,9 @@ export default function PageLayout({ children }: { children: ReactNode }) {
         </div>
       </div>
 
+      {/* Blur removed */}
       {showBlur && (
-        <div className="fixed top-0 left-0 w-full h-[57.5%] z-20 pointer-events-none bg-white/20 backdrop-blur-sm transition-opacity duration-300" />
+        <div className="fixed top-0 left-0 w-full h-[57.5%] z-20 pointer-events-none bg-white/5 transition-opacity duration-300" />
       )}
 
       {!hideLogo && (
@@ -137,15 +138,12 @@ export default function PageLayout({ children }: { children: ReactNode }) {
 
       {menuOpen && (
         <div
-          className="fixed top-0 right-0 w-64 h-[auto] z-[150] flex flex-col items-start p-4 space-y-4 text-white shadow-md rounded-bl-2xl"
-          style={{
-            backgroundImage: `url(${generateAquarelleTexture()})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-          }}
+          className="fixed top-18 right-6 w-72 z-[150] flex flex-col items-start p-4 pt-6 space-y-4 text-white border-5 border-[#3DB8A0] rounded-bl-2xl bg-white/10 backdrop-blur-none"
         >
-          <button onClick={toggleMenu} className="self-end text-white text-2xl">
+          <button
+            onClick={toggleMenu}
+            className="self-end text-[#3DB8A0] text-xl font-bold px-2"
+          >
             <FaTimes />
           </button>
 

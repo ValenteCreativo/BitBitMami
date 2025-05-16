@@ -8,9 +8,9 @@ export default function LearnPage() {
     <>
       <GardenScene zoom={0} theme="summer" />
       <PageLayout>
-      <div className="mt-40" />
+        <div className="mt-40" />
         <h1 className="text-3xl md:text-4xl font-bold text-[#00747a] mb-6">Learn Bitcoin</h1>
-        <p className="text-lg md:text-xl text-[#3db8a0] max-w-2xl mx-auto leading-relaxed bg-white/60 px-6 py-4 rounded-xl shadow-md backdrop-blur-md">
+        <p className="text-lg md:text-xl text-[#3db8a0] max-w-2xl mx-auto leading-relaxed bg-white/80 px-6 py-4 rounded-xl shadow-md">
           Understand the magic behind Bitcoin and learn how to use it to build a better future.
           We curated a gentle path to help you or your business thrive with crypto.
         </p>
