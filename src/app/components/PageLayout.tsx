@@ -80,13 +80,13 @@ export default function PageLayout({ children }: { children: ReactNode }) {
 
       {/* Blur removed */}
       {showBlur && (
-        <div className="fixed top-0 left-0 w-full h-[57.5%] z-20 pointer-events-none bg-white/20 transition-opacity duration-300" />
+        <div className="fixed top-0 left-0 w-full h-[57.5%] z-20 pointer-events-none bg-white/0 transition-opacity duration-300" />
       )}
 
       {!hideLogo && (
         <div className="fixed top-[22%] left-1/2 -translate-x-1/2 z-10 animate-fade-in transition-transform duration-700 ease-out hover:scale-105 pointer-events-none">
           <Image
-            src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiefgcssizawt255mjjqaced3qn7scseiylpnqrmfboma4f7i5gjeu"
+            src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreihts545y5mwvweiaa5rfptypnf4rzvi66dytpfsi2wucfzyifqwvq"
             alt="BitBitMami Logo"
             width={180}
             height={180}
