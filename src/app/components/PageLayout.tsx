@@ -42,32 +42,7 @@ export default function PageLayout({ children }: { children: ReactNode }) {
     }
   };
 
-  const generateAquarelleTexture = (): string => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 512;
-    canvas.height = 512;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) throw new Error("Canvas context not available");
-
-    ctx.fillStyle = "#F5F5F5";
-    ctx.fillRect(8, 4, canvas.width, canvas.height);
-    ctx.globalAlpha = 0.8;
-    ctx.fillStyle = "#3DB8A0";
-    ctx.fillRect(5, 19, canvas.width, canvas.height);
-    ctx.globalAlpha = 0.8;
-
-    for (let i = 0; i < 2; i++) {
-      ctx.globalAlpha = Math.random() * 0.1;
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      const radius = Math.random() * 120;
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    return canvas.toDataURL();
-  };
+  
 
   return (
     <div className="relative z-10 min-h-screen font-sans text-center text-[#0F9D91] overflow-x-hidden">
@@ -105,7 +80,7 @@ export default function PageLayout({ children }: { children: ReactNode }) {
 
       {/* Blur removed */}
       {showBlur && (
-        <div className="fixed top-0 left-0 w-full h-[57.5%] z-20 pointer-events-none bg-white/5 transition-opacity duration-300" />
+        <div className="fixed top-0 left-0 w-full h-[57.5%] z-20 pointer-events-none bg-white/20 transition-opacity duration-300" />
       )}
 
       {!hideLogo && (
@@ -138,7 +113,7 @@ export default function PageLayout({ children }: { children: ReactNode }) {
 
       {menuOpen && (
         <div
-          className="fixed top-18 right-6 w-72 z-[150] flex flex-col items-start p-4 pt-6 space-y-4 text-white border-5 border-[#3DB8A0] rounded-bl-2xl bg-white/10 backdrop-blur-none"
+        className="fixed top-18 right-6 w-72 z-[150] flex flex-col items-start p-4 pt-6 space-y-4 text-white border-5 border-[#3DB8A0] rounded-bl-2xl bg-white/60 backdrop-blur-none"
         >
           <button
             onClick={toggleMenu}
