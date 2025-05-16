@@ -4,8 +4,14 @@ import { ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { CartIcon, ReceiveIcon, SatoshiV3Icon, PieChartIcon, WalletIcon} from '@bitcoin-design/bitcoin-icons-react/outline';
-import { connect } from '@stacks/connect';
+import {
+  CartIcon,
+  ReceiveIcon,
+  SatoshiV3Icon,
+  PieChartIcon,
+  WalletIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
+import { connect } from "@stacks/connect";
 
 export default function PageLayout({ children }: { children: ReactNode }) {
   const [scrollY, setScrollY] = useState(0);
@@ -78,8 +84,15 @@ export default function PageLayout({ children }: { children: ReactNode }) {
               className="p-2 rounded-full bg-[#d4af37] text-white shadow hover:brightness-110 transition"
               onClick={handleConnectWallet}
             >
-              <WalletIcon style={{ height: "20px", width: "20px", color: '#FFFFFF' }} />
+              <WalletIcon
+                style={{ height: "20px", width: "20px", color: "#FFFFFF" }}
+              />
             </button>
+            {walletAddress && (
+              <span className="text-xs text-[#fef7e0] font-mono truncate max-w-[100px]">
+                {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
+              </span>
+            )}
             <button
               className="p-2 rounded-full bg-[#d4af37] text-white shadow hover:brightness-110 transition"
               onClick={toggleMenu}
@@ -111,7 +124,7 @@ export default function PageLayout({ children }: { children: ReactNode }) {
       </div>
 
       <footer className="text-sm text-[#00747A] opacity-80 pb-10 z-30 relative">
-        From México with love <span className="text-[#D4AF37]">❤</span> — open source at{' '}
+        From México with love <span className="text-[#D4AF37]">❤</span> — open source at{" "}
         <a
           href="https://github.com/ValenteCreativo/bitbitmami"
           className="underline hover:text-[#0F9D91]"
@@ -123,8 +136,14 @@ export default function PageLayout({ children }: { children: ReactNode }) {
       </footer>
 
       {menuOpen && (
-        <div className="fixed top-0 right-0 w-64 h-[auto] z-[150] flex flex-col items-start p-4 space-y-4 text-white shadow-md rounded-bl-2xl"
-             style={{ backgroundImage: `url(${generateAquarelleTexture()})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}
+        <div
+          className="fixed top-0 right-0 w-64 h-[auto] z-[150] flex flex-col items-start p-4 space-y-4 text-white shadow-md rounded-bl-2xl"
+          style={{
+            backgroundImage: `url(${generateAquarelleTexture()})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+          }}
         >
           <button onClick={toggleMenu} className="self-end text-white text-2xl">
             <FaTimes />
@@ -132,30 +151,38 @@ export default function PageLayout({ children }: { children: ReactNode }) {
 
           <button
             className="flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-white font-semibold text-lg rounded-full hover:shadow-xl transition-all duration-300 ease-in-out"
-            onClick={() => router.push('/software/savings')}
+            onClick={() => router.push("/software/savings")}
           >
-            <SatoshiV3Icon style={{ height: "20px", width: "20px", color: '#FFFFFF' }} />
+            <SatoshiV3Icon
+              style={{ height: "20px", width: "20px", color: "#FFFFFF" }}
+            />
             Savings Plan
           </button>
           <button
             className="flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-white font-semibold text-lg rounded-full hover:shadow-xl transition-all duration-300 ease-in-out"
-            onClick={() => router.push('/software/learn')}
+            onClick={() => router.push("/software/learn")}
           >
-            <PieChartIcon style={{ height: "20px", width: "20px", color: '#FFFFFF' }} />
+            <PieChartIcon
+              style={{ height: "20px", width: "20px", color: "#FFFFFF" }}
+            />
             Learn Bitcoin
           </button>
           <button
             className="flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-white font-semibold text-lg rounded-full hover:shadow-xl transition-all duration-300 ease-in-out"
-            onClick={() => router.push('/software/networking')}
+            onClick={() => router.push("/software/networking")}
           >
-            <CartIcon style={{ height: "20px", width: "20px", color: '#FFFFFF' }} />
+            <CartIcon
+              style={{ height: "20px", width: "20px", color: "#FFFFFF" }}
+            />
             Circular Economy
           </button>
           <button
             className="flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-white font-semibold text-lg rounded-full hover:shadow-xl transition-all duration-300 ease-in-out"
-            onClick={() => router.push('/software/send')}
+            onClick={() => router.push("/software/send")}
           >
-            <ReceiveIcon style={{ height: "20px", width: "20px", color: '#FFFFFF' }} />
+            <ReceiveIcon
+              style={{ height: "20px", width: "20px", color: "#FFFFFF" }}
+            />
             Send / Receive
           </button>
         </div>

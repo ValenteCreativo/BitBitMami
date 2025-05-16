@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaWallet } from "react-icons/fa";
 import { connect } from '@stacks/connect'; 
 import { WalletIcon } from '@bitcoin-design/bitcoin-icons-react/outline';
 
