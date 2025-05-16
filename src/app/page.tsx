@@ -1,37 +1,23 @@
-"use client";
+// src/app/Home.tsx
+"use client"
 
-import { useEffect, useState } from "react";
-import { FaWallet } from "react-icons/fa";
+import Wallet from "./components/Wallet"; // Importar el nuevo componente Wallet
 import Image from "next/image";
 import GardenScene from "./components/GardenScene";
 import Link from "next/link";
 
 export default function Home() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const logoOpacity = scrollY < 120 ? 1 : 0;
-
   return (
     <main className="relative min-h-screen font-sans text-[#0F9D91] overflow-hidden">
       <GardenScene zoom={0} />
 
-      {/* Connect Wallet in corner */}
-      <div className="fixed top-6 right-6 z-20 animate-fade-in">
-        <button className="flex items-center gap-2 px-5 py-2 bg-[#D4AF37] text-white rounded-full shadow hover:brightness-110 transition text-sm md:text-base">
-          <FaWallet /> Connect Wallet
-        </button>
-      </div>
+      
+      <Wallet />
 
-      {/* Fixed Logo with scroll-aware fade */}
+      
       <div
         className="fixed top-[22%] left-1/2 -translate-x-1/2 z-10 transition-opacity duration-500 ease-out pointer-events-none"
-        style={{ opacity: logoOpacity }}
+        style={{ opacity: 1 }}
       >
         <Image
           src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiefgcssizawt255mjjqaced3qn7scseiylpnqrmfboma4f7i5gjeu"

@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@bitcoin-design/bitcoin-icons-react": "^0.1.10",
+    "@stacks/connect": "^8.1.9",
+    "@stacks/network": "^7.0.2",
+    "@stacks/transactions": "^7.0.6",
     "framer-motion": "^12.11.0",
     "next": "15.3.2",
     "react": "^19.0.0",

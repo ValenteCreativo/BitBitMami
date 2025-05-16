@@ -3,10 +3,14 @@
 import { ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { CartIcon, ReceiveIcon, SatoshiV3Icon, PieChartIcon, WalletIcon } from '@bitcoin-design/bitcoin-icons-react/outline';
+import { connect } from '@stacks/connect';
 
 export default function PageLayout({ children }: { children: ReactNode }) {
   const [scrollY, setScrollY] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -18,32 +22,78 @@ export default function PageLayout({ children }: { children: ReactNode }) {
   const showBlur = scrollY > 100;
   const hideLogo = scrollY > 120;
 
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  const handleConnectWallet = async () => {
+    try {
+      const response = await connect();
+      if (response && response.addresses) {
+        const address = response.addresses[0]?.address;
+        setWalletAddress(address || null);
+      }
+    } catch (error) {
+      console.error("Connection failed", error);
+    }
+  };
+
+  const generateAquarelleTexture = (): string => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 512;
+    canvas.height = 512;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("Canvas context not available");
+
+    ctx.fillStyle = "#F5F5F5";
+    ctx.fillRect(8, 4, canvas.width, canvas.height);
+    ctx.globalAlpha = 0.8;
+    ctx.fillStyle = "#3DB8A0";
+    ctx.fillRect(5, 19, canvas.width, canvas.height);
+    ctx.globalAlpha = 0.8;
+
+    for (let i = 0; i < 2; i++) {
+      ctx.globalAlpha = Math.random() * 0.1;
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      const radius = Math.random() * 120;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    return canvas.toDataURL();
+  };
+
   return (
     <div className="relative z-10 min-h-screen font-sans text-center text-[#0F9D91] overflow-x-hidden">
-      {/* Header Layer always on top */}
       <div className="fixed top-0 left-0 w-full z-[100] pointer-events-none">
         <div className="flex justify-between items-center px-6 pt-6 pointer-events-auto">
-          {/* Back button */}
           <button
             onClick={() => router.push("/")}
             className="bg-[#fef7e0] text-[#6e4b1f] font-semibold px-4 py-2 rounded-full shadow-md hover:bg-[#fff3c0] transition-all border border-[#d4af37]"
           >
             ← Back to Garden
           </button>
-
-          {/* Menu */}
-          <button className="p-2 rounded-full bg-[#d4af37] text-white shadow hover:brightness-110 transition">
-            <FaBars size={20} />
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              className="p-2 rounded-full bg-[#d4af37] text-white shadow hover:brightness-110 transition"
+              onClick={handleConnectWallet}
+            >
+              <WalletIcon style={{ height: "20px", width: "20px", color: '#FFFFFF' }} />
+            </button>
+            <button
+              className="p-2 rounded-full bg-[#d4af37] text-white shadow hover:brightness-110 transition"
+              onClick={toggleMenu}
+            >
+              <FaBars size={20} />
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Soft blur panel */}
       {showBlur && (
         <div className="fixed top-0 left-0 w-full h-[57.5%] z-20 pointer-events-none bg-white/20 backdrop-blur-sm transition-opacity duration-300" />
       )}
 
-      {/* Logo */}
       {!hideLogo && (
         <div className="fixed top-[22%] left-1/2 -translate-x-1/2 z-10 animate-fade-in transition-transform duration-700 ease-out hover:scale-105 pointer-events-none">
           <Image
@@ -56,12 +106,10 @@ export default function PageLayout({ children }: { children: ReactNode }) {
         </div>
       )}
 
-      {/* Main content */}
       <div className="pt-[440px] pb-20 px-6 w-full max-w-4xl mx-auto flex flex-col items-center z-30 relative">
         {children}
       </div>
 
-      {/* Footer */}
       <footer className="text-sm text-[#00747A] opacity-80 pb-10 z-30 relative">
         From México with love <span className="text-[#D4AF37]">❤</span> — open source at{' '}
         <a
@@ -73,6 +121,45 @@ export default function PageLayout({ children }: { children: ReactNode }) {
           GitHub
         </a>
       </footer>
+
+      {menuOpen && (
+        <div className="fixed top-0 right-0 w-64 h-[auto] z-[150] flex flex-col items-start p-4 space-y-4 text-white shadow-md rounded-bl-2xl"
+             style={{ backgroundImage: `url(${generateAquarelleTexture()})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}
+        >
+          <button onClick={toggleMenu} className="self-end text-white text-2xl">
+            <FaTimes />
+          </button>
+
+          <button
+            className="flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-white font-semibold text-lg rounded-full hover:shadow-xl transition-all duration-300 ease-in-out"
+            onClick={() => router.push('/software/savings')}
+          >
+            <SatoshiV3Icon style={{ height: "20px", width: "20px", color: '#FFFFFF' }} />
+            Savings Plan
+          </button>
+          <button
+            className="flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-white font-semibold text-lg rounded-full hover:shadow-xl transition-all duration-300 ease-in-out"
+            onClick={() => router.push('/software/learn')}
+          >
+            <PieChartIcon style={{ height: "20px", width: "20px", color: '#FFFFFF' }} />
+            Learn Bitcoin
+          </button>
+          <button
+            className="flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-white font-semibold text-lg rounded-full hover:shadow-xl transition-all duration-300 ease-in-out"
+            onClick={() => router.push('/software/networking')}
+          >
+            <CartIcon style={{ height: "20px", width: "20px", color: '#FFFFFF' }} />
+            Circular Economy
+          </button>
+          <button
+            className="flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-white font-semibold text-lg rounded-full hover:shadow-xl transition-all duration-300 ease-in-out"
+            onClick={() => router.push('/software/send')}
+          >
+            <ReceiveIcon style={{ height: "20px", width: "20px", color: '#FFFFFF' }} />
+            Send / Receive
+          </button>
+        </div>
+      )}
     </div>
   );
 }
