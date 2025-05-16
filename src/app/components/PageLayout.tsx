@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { CartIcon, ReceiveIcon, SatoshiV3Icon, PieChartIcon, WalletIcon } from '@bitcoin-design/bitcoin-icons-react/outline';
+import { CartIcon, ReceiveIcon, SatoshiV3Icon, PieChartIcon, WalletIcon} from '@bitcoin-design/bitcoin-icons-react/outline';
 import { connect } from '@stacks/connect';
 
 export default function PageLayout({ children }: { children: ReactNode }) {
