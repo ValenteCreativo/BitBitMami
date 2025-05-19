@@ -1,24 +1,34 @@
+// /src/app/components/Savings/SavingsTransaction.tsx
+
 "use client";
 
 import { useState } from "react";
+import { sendRawTransaction } from "@/app/Utils/rebarAPI"; // Función para enviar transacciones
 
-const SavingsTransaction = ({ amount, recipient }: any) => {
-  const [status, setStatus] = useState("Pending");
+const SavingsTransaction = ({ recipient, amount }: { recipient: string; amount: number }) => {
+  const [txid, setTxid] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleTransaction = () => {
-    // Simulamos la transacción
-    setStatus("Processing...");
-    setTimeout(() => {
-      setStatus("Transaction Complete");
-    }, 2000); // Simula una transacción de 2 segundos
+  const handleSendTransaction = async () => {
+    try {
+      const rawTx = "raw_tx_hex_here"; // Aquí usarías el método adecuado para generar la transacción (simulada)
+      const response = await sendRawTransaction(rawTx);
+      setTxid(response.result); // Simulamos que se genera un txid
+    } catch (err: any) {
+      setError("Transaction failed: " + err.message);
+    }
   };
 
   return (
-    <div>
-      <h3>Transaction Status: {status}</h3>
-      <button onClick={handleTransaction} className="p-2 bg-[#0F9D91] text-white rounded">
-        Simulate Transaction
+    <div className="mt-6">
+      <h2 className="text-lg font-semibold">Send Bitcoin</h2>
+      <p>Recipient: {recipient}</p>
+      <p>Amount: {amount} sBTC</p>
+      <button onClick={handleSendTransaction} className="bg-[#3DB8A0] text-white py-2 px-4 rounded-full mt-4">
+        Send Transaction
       </button>
+      {txid && <p>Transaction ID: {txid}</p>}
+      {error && <p className="text-red-500">{error}</p>}
     </div>
   );
 };
