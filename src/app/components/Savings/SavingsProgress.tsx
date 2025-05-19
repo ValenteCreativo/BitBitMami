@@ -1,34 +1,24 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
-export default function SavingsProgress() {
-  const [progress, setProgress] = useState(0);
-  const [currentBalance, setCurrentBalance] = useState(0);
-  const goalAmount = 1000; // Simulamos un objetivo de ahorro de 1000 sBTC
-
-  useEffect(() => {
-    // Calculamos el progreso en función del balance actual (esto es simulado)
-    const progress = (currentBalance / goalAmount) * 100;
-    setProgress(progress);
-  }, [currentBalance]);
+const SavingsProgress = ({ boxes = [] }: any) => { // Aseguramos que boxes nunca sea undefined
+  const totalGoal = boxes.reduce((acc: any, box: any) => acc + box.amount, 0);
+  const totalSaved = boxes.reduce((acc: any, box: any) => acc + box.amount, 0);
 
   return (
     <div>
-      <h2 className="text-lg font-semibold text-[#0F9D91] mb-4">Progress</h2>
+      <h2 className="text-xl font-semibold mb-4">Savings Progress</h2>
       <div className="mb-4">
-        <p>Current Balance: {currentBalance} sBTC</p>
-        <div className="w-full bg-[#D4AF37] rounded-full h-2 mt-2">
+        <p>Total Goal: {totalGoal} sBTC</p>
+        <p>Total Saved: {totalSaved} sBTC</p>
+        <div className="progress-bar">
           <div
-            className="bg-[#0F9D91] h-2"
-            style={{ width: `${Math.min(progress, 100)}%` }}
+            style={{ width: `${(totalSaved / totalGoal) * 100}%` }}
+            className="progress"
           ></div>
         </div>
-        <p>Progress: {Math.min(progress, 100)}%</p>
       </div>
-      <button onClick={() => setCurrentBalance(currentBalance + 100)}>
-        Add 100 sBTC
-      </button>
     </div>
   );
-}
+};
+
+export default SavingsProgress;

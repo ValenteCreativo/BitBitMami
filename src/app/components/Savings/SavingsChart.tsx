@@ -32,4 +32,4 @@ const SavingsChart = () => {
   );
 };
 
-export default SavingsChart; 
+export default SavingsChart;

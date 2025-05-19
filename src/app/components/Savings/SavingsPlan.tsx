@@ -2,55 +2,77 @@
 
 import { useState } from "react";
 
-export default function SavingsPlan() {
+const SavingsPlan = () => {
+  const [totalAmount, setTotalAmount] = useState(0);
   const [goalAmount, setGoalAmount] = useState(0);
-  const [targetDate, setTargetDate] = useState("");
-  
-  const handleCreateSavingsPlan = () => {
-    if (!goalAmount || !targetDate) {
-      alert("Por favor, ingresa una cantidad y una fecha objetivo.");
-      return;
-    }
+  const [goalName, setGoalName] = useState("");
+  const [boxes, setBoxes] = useState<any[]>([]);
 
-    // Aquí iría la lógica de conectar con Stacks para crear el plan
-    console.log(`Objetivo de ahorro creado: ${goalAmount} hasta el ${targetDate}`);
+  const handleAddGoal = () => {
+    if (goalAmount <= totalAmount) {
+      setBoxes([...boxes, { name: goalName, amount: goalAmount }]);
+      setTotalAmount(totalAmount - goalAmount); // Restar el dinero del total
+      setGoalAmount(0);
+      setGoalName("");
+    } else {
+      alert("Insufficient balance for this goal.");
+    }
   };
 
   return (
     <div>
+      <h2 className="text-xl font-semibold mb-4">Create your Savings Plan</h2>
+      
+      {/* Total amount */}
       <div className="mb-4">
-        <label htmlFor="goalAmount" className="block text-lg font-semibold">
-          Objective Amount (sBTC):
-        </label>
         <input
           type="number"
-          id="goalAmount"
+          placeholder="Total available amount"
+          className="p-2 border rounded"
+          value={totalAmount}
+          onChange={(e) => setTotalAmount(Number(e.target.value))}
+        />
+      </div>
+      
+      {/* Goal details */}
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Goal Name (e.g., Travel)"
+          className="p-2 border rounded"
+          value={goalName}
+          onChange={(e) => setGoalName(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Goal Amount"
+          className="p-2 border rounded ml-4"
           value={goalAmount}
           onChange={(e) => setGoalAmount(Number(e.target.value))}
-          className="mt-2 p-2 w-full border border-[#0F9D91] rounded-lg"
-          placeholder="Enter amount in sBTC"
         />
+        <button
+          onClick={handleAddGoal}
+          className="ml-4 p-2 bg-[#0F9D91] text-white rounded"
+        >
+          Add Goal
+        </button>
       </div>
 
-      <div className="mb-4">
-        <label htmlFor="targetDate" className="block text-lg font-semibold">
-          Target Date:
-        </label>
-        <input
-          type="date"
-          id="targetDate"
-          value={targetDate}
-          onChange={(e) => setTargetDate(e.target.value)}
-          className="mt-2 p-2 w-full border border-[#0F9D91] rounded-lg"
-        />
+      {/* Display goals */}
+      <div className="mb-6">
+        <h3 className="font-semibold">Your Goals</h3>
+        {boxes.map((box, index) => (
+          <div key={index} className="flex justify-between items-center mb-2">
+            <span>{box.name}</span>
+            <span>{box.amount} sBTC</span>
+          </div>
+        ))}
       </div>
 
-      <button
-        onClick={handleCreateSavingsPlan}
-        className="w-full bg-[#0F9D91] text-white font-semibold p-3 rounded-lg hover:bg-[#3DB8A0] transition-all"
-      >
-        Create Savings Plan
-      </button>
+      {/* Remaining Balance */}
+      <h4>Remaining Balance: {totalAmount} sBTC</h4>
     </div>
   );
-}
+};
+
+export default SavingsPlan;
