@@ -1,7 +1,14 @@
-"use client"
+"use client";
 
+import { useState } from "react";
 import PageLayout from "@/app/components/PageLayout";
 import GardenScene from "@/app/components/GardenScene";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs"; // Importamos las librerías necesarias para Tabs
+import "react-tabs/style/react-tabs.css"; // Estilo de react-tabs
+
+import SavingsPlan from "@/app/components/Savings/SavingsPlan";
+import SavingsProgress from "@/app/components/Savings/SavingsProgress";
+import SavingsChart from "@/app/components/Savings/SavingsChart";
 
 export default function SavingsPage() {
   return (
@@ -13,45 +20,31 @@ export default function SavingsPage() {
             Savings Plan
           </h1>
 
-          <p className="text-lg md:text-xl text-[#3db8a0] max-w-2xl mx-auto leading-relaxed bg-white/70 px-6 py-4 rounded-xl shadow-md">
-            Set your Bitcoin savings goals and follow your path step by step.
-            Track progress, get rewarded, and feel confident about your financial journey.
-          </p>
+          {/* Tabs de ahorro */}
+          <Tabs>
+            <TabList className="flex gap-6 mb-8">
+              <Tab className="text-lg font-semibold text-[#0F9D91] px-4 py-2 rounded-lg bg-[#F5F5F5] hover:bg-[#D4AF37]">
+                Create Plan
+              </Tab>
+              <Tab className="text-lg font-semibold text-[#0F9D91] px-4 py-2 rounded-lg bg-[#F5F5F5] hover:bg-[#D4AF37]">
+                Progress
+              </Tab>
+              <Tab className="text-lg font-semibold text-[#0F9D91] px-4 py-2 rounded-lg bg-[#F5F5F5] hover:bg-[#D4AF37]">
+                Goal Tracker
+              </Tab>
+            </TabList>
 
-          <div className="mt-12 flex flex-wrap justify-center gap-6 max-w-3xl">
-            {[
-              { title: "Create Your Plan", url: "#" },
-              { title: "Track Progress", url: "#" },
-              { title: "Visual Goal Tracker", url: "#" },
-              { title: "Milestones & Rewards", url: "#" }
-            ].map((item, idx) => (
-              <button
-                key={idx}
-                className="px-8 py-4 rounded-full bg-[#3DB8A0] text-white font-semibold text-lg shadow-lg hover:bg-[#0F9D91] hover:shadow-xl hover:brightness-105 transition-all duration-300"
-                onClick={() => alert(`Navigate to ${item.title}`)}
-              >
-                {item.title}
-              </button>
-            ))}
-          </div>
+            <TabPanel>
+              <SavingsPlan />
+            </TabPanel>
+            <TabPanel>
+              <SavingsProgress />
+            </TabPanel>
+            <TabPanel>
+              <SavingsChart/>
+            </TabPanel>
+          </Tabs>
         </div>
-
-        <style jsx global>{`
-          @keyframes fade-in-slow {
-            from {
-              opacity: 0;
-              transform: translateY(-10px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          .animate-fade-in-slow {
-            animation: fade-in-slow 1.4s ease-out forwards;
-          }
-        `}</style>
       </PageLayout>
     </>
   );
