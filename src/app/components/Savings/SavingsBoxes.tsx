@@ -4,13 +4,7 @@ import { useSavingsStore } from "@/app/store/savingsStore";
 import { useState } from "react";
 
 const SavingsBoxes = () => {
-  const {
-    savingsBoxes = [], // 👈 valor por defecto
-    totalAmount,
-    setTotalAmount,
-    addBox,
-    removeBox
-  } = useSavingsStore();
+  const { savingsBoxes, totalAmount, addBox, removeBox } = useSavingsStore();
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(0);

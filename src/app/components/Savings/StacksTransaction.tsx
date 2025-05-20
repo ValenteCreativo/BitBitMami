@@ -1,30 +1,63 @@
-import { UserSession } from "@stacks/auth";
-import { STACKS_TESTNET } from "@stacks/network"; // Usamos la constante correcta para la red
+"use client";
 
-// Simulamos el proceso de envío de sBTC sin acceder a la clave privada real
-export const sendSbtc = async (recipient: string, amount: number) => {
-  const userSession = new UserSession();
-  const userData = userSession.loadUserData();
+import { useState } from "react";
+import { sendSbtc } from "@/app/Utils/stacks/sendSbtc";
 
-  if (!userData) {
-    throw new Error("User is not authenticated.");
-  }
+interface Props {
+  recipient: string;
+  amount: number;
+}
 
-  const senderAddress = userData.profile.stxAddress;
+const StacksTransaction = ({ recipient, amount }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const [txid, setTxid] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  // Simulación de la transacción (no usamos privateKey ni authKey)
-  console.log(`Simulando transacción: ${amount} sBTC desde ${senderAddress} a ${recipient}`);
+  const handleSend = async () => {
+    setLoading(true);
+    setError(null);
+    setTxid(null);
 
-  // En lugar de usar una clave privada real, simulamos la creación de una transacción
-  const transaction = {
-    senderKey: "simulated_private_key", // Simulamos una clave privada
-    recipient,
-    amount,
-    fee: 1000,
-    network: STACKS_TESTNET,
+    try {
+      const result: string = await sendSbtc(recipient, amount);
+      setTxid(result);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError("Transaction failed: " + err.message);
+      } else {
+        setError("Transaction failed: Unknown error");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Simulamos el broadcast de la transacción (sin enviarla a la red)
-  const response = { txid: "simulated_txid_123456" }; // Simulamos una txid
-  return response.txid; // Retornamos la txid simulada
+  return (
+    <div className="w-full max-w-xl mt-12">
+      <h2 className="text-2xl font-bold text-[#00747a] mb-4">Simulate Send Transaction</h2>
+      <p className="text-sm text-[#3db8a0] mb-2">
+        <strong>Recipient:</strong> {recipient}
+      </p>
+      <p className="text-sm text-[#3db8a0] mb-6">
+        <strong>Amount:</strong> {amount} sBTC
+      </p>
+
+      <button
+        onClick={handleSend}
+        disabled={loading}
+        className="bg-[#0f9d91] text-white px-6 py-3 rounded-xl hover:bg-[#3db8a0] transition"
+      >
+        {loading ? "Sending..." : "Send sBTC"}
+      </button>
+
+      {txid && (
+        <p className="mt-4 text-sm text-green-600 break-all">
+          Transaction ID: {txid}
+        </p>
+      )}
+      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+    </div>
+  );
 };
+
+export default StacksTransaction;
