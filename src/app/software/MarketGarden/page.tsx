@@ -5,8 +5,15 @@ import PageLayout from "@/app/components/PageLayout";
 import BusinessTabs from "@/app/components/MarketGarden/BusinessTabs";
 import MapboxMap from "@/app/components/MarketGarden/MapboxMap";
 import AddBusinessModal from "@/app/components/MarketGarden/AddBusinessModal";
+import { useMarketStore } from "@/app/store/marketStore";
+import { businesses } from "@/app/components/MarketGarden/MarketData";
+import DigitalBusinessCard from "@/app/components/MarketGarden/DigitalBusinessCard";
 
 export default function MarketGardenPage() {
+  const { currentTab } = useMarketStore();
+
+  const digitalBusinesses = businesses.filter((biz) => biz.type === "digital");
+
   return (
     <>
       <GardenScene zoom={0} theme="fall" />
@@ -21,7 +28,16 @@ export default function MarketGardenPage() {
 
           <AddBusinessModal />
           <BusinessTabs />
-          <MapboxMap />
+
+          {currentTab === "physical" ? (
+            <MapboxMap />
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
+              {digitalBusinesses.map((biz) => (
+                <DigitalBusinessCard key={biz.id} business={biz} />
+              ))}
+            </div>
+          )}
         </div>
       </PageLayout>
     </>

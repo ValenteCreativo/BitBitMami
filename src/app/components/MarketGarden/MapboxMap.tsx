@@ -13,7 +13,7 @@ const MapboxMap = () => {
     <div className="w-full h-[500px] rounded-2xl overflow-hidden shadow-2xl border border-[#3db8a055]">
       <Map
         initialViewState={{
-          longitude: -80,
+          longitude: -90,
           latitude: 15,
           zoom: 2.2,
         }}
