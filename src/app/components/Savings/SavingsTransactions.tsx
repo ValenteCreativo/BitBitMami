@@ -1,34 +1,47 @@
-// /src/app/components/Savings/SavingsTransaction.tsx
-
 "use client";
 
 import { useState } from "react";
-import { sendRawTransaction } from "@/app/Utils/rebarAPI"; // Función para enviar transacciones
+import { sendSbtc } from "@/app/Utils/stacks/sendSbtc";
 
-const SavingsTransaction = ({ recipient, amount }: { recipient: string; amount: number }) => {
+type Props = {
+  recipient: string;
+  amount: number;
+};
+
+const SavingsTransaction = ({ recipient, amount }: Props) => {
   const [txid, setTxid] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSendTransaction = async () => {
+  const handleSend = async () => {
+    setLoading(true);
     try {
-      const rawTx = "raw_tx_hex_here"; // Aquí usarías el método adecuado para generar la transacción (simulada)
-      const response = await sendRawTransaction(rawTx);
-      setTxid(response.result); // Simulamos que se genera un txid
-    } catch (err: any) {
-      setError("Transaction failed: " + err.message);
+      const tx = await sendSbtc(recipient, amount);
+      setTxid(tx);
+    } catch (err) {
+      console.error("Error sending:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="mt-6">
-      <h2 className="text-lg font-semibold">Send Bitcoin</h2>
-      <p>Recipient: {recipient}</p>
-      <p>Amount: {amount} sBTC</p>
-      <button onClick={handleSendTransaction} className="bg-[#3DB8A0] text-white py-2 px-4 rounded-full mt-4">
-        Send Transaction
+    <div className="bg-white/60 rounded-xl p-6 shadow-md backdrop-blur-md mt-10">
+      <h3 className="text-xl font-semibold text-[#00747a] mb-2">Send sBTC to a Goal</h3>
+      <p className="text-sm mb-4 text-[#0f9d91]">Send {amount} sBTC to {recipient}</p>
+
+      <button
+        onClick={handleSend}
+        disabled={loading}
+        className="bg-[#0f9d91] text-white px-6 py-2 rounded-full hover:bg-[#3db8a0] transition"
+      >
+        {loading ? "Sending..." : "Send Transaction"}
       </button>
-      {txid && <p>Transaction ID: {txid}</p>}
-      {error && <p className="text-red-500">{error}</p>}
+
+      {txid && (
+        <p className="mt-4 text-sm text-[#00747a]">
+          ✅ Mock transaction sent! ID: <span className="font-mono">{txid}</span>
+        </p>
+      )}
     </div>
   );
 };

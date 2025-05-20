@@ -1,58 +1,72 @@
 "use client";
 
-import { useState } from "react";
 import PageLayout from "@/app/components/PageLayout";
 import GardenScene from "@/app/components/GardenScene";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"; 
-import "react-tabs/style/react-tabs.css"; 
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
 import SavingsPlan from "@/app/components/Savings/SavingsPlan";
 import SavingsProgress from "@/app/components/Savings/SavingsProgress";
 import SavingsChart from "@/app/components/Savings/SavingsChart";
+import SavingsVaults from "@/app/components/Savings/SavingsVaults";
+import WalletInfo from "@/app/components/Savings/WalletInfo";
 import SavingsTransaction from "@/app/components/Savings/SavingsTransactions";
 
 export default function SavingsPage() {
-  const [boxes, setBoxes] = useState<any[]>([]); // Guardamos las "cajitas"
-
   return (
     <>
       <GardenScene zoom={0} theme="spring" />
       <PageLayout>
-        <div className="mt-[120px] flex flex-col items-center justify-start text-center px-6 pb-20 animate-fade-in-slow">
-          <h1 className="text-3xl md:text-4xl font-bold text-[#00747a] mb-6">Savings Plan</h1>
+        <div className="mt-[100px] bg-white/60 backdrop-blur-md px-8 py-10 rounded-xl shadow-xl w-full max-w-4xl">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#00747a] mb-6">
+          Save Bitcoin with sBTC on Stacks
+          </h1>
+          <p className="text-lg text-[#3db8a0] mb-10">
+            Set your Bitcoin goals, connect with the Stacks network, and use smart DeFi strategies leveraging sBTC.
+          </p>
 
-          {/* Tabs de ahorro */}
           <Tabs>
-            <TabList className="flex gap-4 mb-8">
-              <Tab 
-                className="text-lg font-semibold text-[#0F9D91] px-6 py-3 rounded-xl bg-[#F5F5F5] hover:bg-[#D4AF37] hover:text-white transition-all duration-300"
-              >
-                Create Plan
-              </Tab>
-              <Tab 
-                className="text-lg font-semibold text-[#0F9D91] px-6 py-3 rounded-xl bg-[#F5F5F5] hover:bg-[#D4AF37] hover:text-white transition-all duration-300"
-              >
-                Progress
-              </Tab>
-              <Tab 
-                className="text-lg font-semibold text-[#0F9D91] px-6 py-3 rounded-xl bg-[#F5F5F5] hover:bg-[#D4AF37] hover:text-white transition-all duration-300"
-              >
-                Goal Tracker
-              </Tab>
+            <TabList className="flex flex-wrap justify-center gap-4 mb-8">
+              <Tab className="tab">Create & Manage Plan</Tab>
+              <Tab className="tab">Track Progress</Tab>
+              <Tab className="tab">Explore Vaults</Tab>
             </TabList>
 
             <TabPanel>
+              <WalletInfo />
               <SavingsPlan />
+              <SavingsTransaction recipient="mock_btc_address" amount={1000} />
             </TabPanel>
-            <TabPanel>
-              <SavingsProgress boxes={boxes} />
-            </TabPanel>
+
             <TabPanel>
               <SavingsChart />
-              <SavingsTransaction amount={500} recipient="recipient_address" />
+              <SavingsProgress />
+            </TabPanel>
+
+            <TabPanel>
+              <SavingsVaults />
             </TabPanel>
           </Tabs>
         </div>
+
+        <style jsx global>{`
+          .tab {
+            background-color: #fef7e0;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            font-weight: 600;
+            color: #00747a;
+            cursor: pointer;
+          }
+          .tab:hover {
+            background-color: #d4af37;
+            color: white;
+          }
+          .tab.react-tabs__tab--selected {
+            background-color: #0f9d91;
+            color: white;
+          }
+        `}</style>
       </PageLayout>
     </>
   );

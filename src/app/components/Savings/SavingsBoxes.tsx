@@ -1,98 +1,89 @@
 "use client";
 
+import { useSavingsStore } from "@/app/store/savingsStore";
 import { useState } from "react";
 
-// Simulamos las transacciones para distribuir el dinero entre las "cajitas"
 const SavingsBoxes = () => {
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [boxes, setBoxes] = useState<any[]>([]); // Para almacenar las "cajitas"
-  const [boxName, setBoxName] = useState("");
-  const [boxAmount, setBoxAmount] = useState(0);
+  const {
+    savingsBoxes = [], // 👈 valor por defecto
+    totalAmount,
+    setTotalAmount,
+    addBox,
+    removeBox
+  } = useSavingsStore();
 
-  const handleAddBox = () => {
-    if (boxName && boxAmount > 0 && totalAmount >= boxAmount) {
-      setBoxes([...boxes, { name: boxName, amount: boxAmount }]);
-      setTotalAmount(totalAmount - boxAmount); // Restar el dinero de la caja
-      setBoxName(""); // Limpiar el campo de nombre
-      setBoxAmount(0); // Limpiar el campo de cantidad
-    } else {
-      alert("Ensure the amount is valid and available.");
+  const [name, setName] = useState("");
+  const [amount, setAmount] = useState(0);
+
+  const handleAdd = () => {
+    if (!name || amount <= 0) {
+      alert("Please enter a valid name and amount.");
+      return;
     }
-  };
 
-  const handleAddMoney = (amount: number) => {
-    setTotalAmount(totalAmount + amount); // Agregar dinero al total disponible
-  };
+    if (amount > totalAmount) {
+      alert("Insufficient funds.");
+      return;
+    }
 
-  const handleRemoveBox = (name: string) => {
-    const updatedBoxes = boxes.filter((box) => box.name !== name);
-    setBoxes(updatedBoxes);
+    addBox({ name, amount, saved: 0 });
+    setName("");
+    setAmount(0);
   };
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Distribute your savings</h2>
+    <div className="w-full max-w-xl">
+      <h2 className="text-2xl font-bold text-[#00747a] mb-6">Distribute Savings</h2>
 
-      {/* Input para agregar dinero */}
-      <div className="mb-6">
-        <input
-          type="number"
-          placeholder="Add money"
-          className="p-2 border rounded"
-          value={totalAmount}
-          onChange={(e) => setTotalAmount(Number(e.target.value))}
-        />
-        <button
-          onClick={() => handleAddMoney(100)} // Agregar 100 sBTC como ejemplo
-          className="ml-4 p-2 bg-[#0F9D91] text-white rounded"
-        >
-          Add 100 sBTC
-        </button>
-      </div>
-
-      {/* Formulario para agregar una "cajita" */}
-      <div className="mb-6">
+      <div className="flex flex-col md:flex-row gap-4 mb-6">
         <input
           type="text"
-          placeholder="Box name (e.g., Travel, Education)"
-          className="p-2 border rounded"
-          value={boxName}
-          onChange={(e) => setBoxName(e.target.value)}
+          placeholder="Box name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="flex-1 p-3 border border-[#3db8a0] rounded-xl"
         />
         <input
           type="number"
           placeholder="Amount"
-          className="p-2 border rounded ml-4"
-          value={boxAmount}
-          onChange={(e) => setBoxAmount(Number(e.target.value))}
+          value={amount}
+          onChange={(e) => setAmount(Number(e.target.value))}
+          className="w-32 p-3 border border-[#3db8a0] rounded-xl"
         />
         <button
-          onClick={handleAddBox}
-          className="ml-4 p-2 bg-[#0F9D91] text-white rounded"
+          onClick={handleAdd}
+          className="bg-[#3db8a0] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#0f9d91] transition"
         >
           Add Box
         </button>
       </div>
 
-      {/* Mostrar las "cajitas" creadas */}
-      <div className="mb-6">
-        <h3 className="font-semibold">Your Savings Boxes</h3>
-        {boxes.map((box, index) => (
-          <div key={index} className="flex justify-between items-center mb-2">
-            <span>{box.name}</span>
-            <span>{box.amount} sBTC</span>
-            <button
-              onClick={() => handleRemoveBox(box.name)}
-              className="bg-red-500 text-white rounded px-2 py-1"
+      {savingsBoxes.length === 0 ? (
+        <p className="text-[#0f9d91] opacity-80">No boxes yet. Start by adding one!</p>
+      ) : (
+        <div className="space-y-4">
+          {savingsBoxes.map((box, index) => (
+            <div
+              key={index}
+              className="flex justify-between items-center bg-white/70 p-4 rounded-xl shadow border border-[#d4af37]"
             >
-              Remove
-            </button>
-          </div>
-        ))}
-      </div>
+              <div>
+                <p className="font-semibold text-[#0f9d91]">{box.name}</p>
+                <p>{box.amount} sBTC</p>
+              </div>
+              <button
+                onClick={() => removeBox(box.name)}
+                className="text-sm bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 transition"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
-      <div className="mb-6">
-        <h3 className="font-semibold">Remaining Amount: {totalAmount} sBTC</h3>
+      <div className="mt-6 text-sm text-[#0f9d91]">
+        <strong>Remaining Total:</strong> {totalAmount} sBTC
       </div>
     </div>
   );

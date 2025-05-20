@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchRebarData } from "@/app/Utils/rebarAPI"; // Importa las funciones para interactuar con Rebar
+import { fetchRebarData } from "@/app/Utils/rebar/rebarAPI"; // Importa las funciones para interactuar con Rebar
 import PageLayout from "@/app/components/PageLayout";
 import GardenScene from "@/app/components/GardenScene";
 import PriceCard from "@/app/components/Learn/PriceCard"; // Componente para mostrar el precio

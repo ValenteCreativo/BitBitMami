@@ -1,76 +1,66 @@
-"use client";
-
 import { useState } from "react";
+import { useSavingsStore } from "@/app/store/savingsStore";
 
 const SavingsPlan = () => {
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [goalAmount, setGoalAmount] = useState(0);
-  const [goalName, setGoalName] = useState("");
-  const [boxes, setBoxes] = useState<any[]>([]);
+  const { totalAmount, savingsBoxes, addBox, removeBox } = useSavingsStore();
+  const [name, setName] = useState("");
+  const [usdAmount, setUsdAmount] = useState(0);
 
-  const handleAddGoal = () => {
-    if (goalAmount <= totalAmount) {
-      setBoxes([...boxes, { name: goalName, amount: goalAmount }]);
-      setTotalAmount(totalAmount - goalAmount); // Restar el dinero del total
-      setGoalAmount(0);
-      setGoalName("");
-    } else {
-      alert("Insufficient balance for this goal.");
+  const btcToUsd = 67000;
+  const sbtcAmount = Math.round((usdAmount / btcToUsd) * 100000000);
+
+  const handleAdd = () => {
+    if (!name || sbtcAmount <= 0 || sbtcAmount > totalAmount) {
+      alert("Check name or amount");
+      return;
     }
+    addBox({ name, amount: sbtcAmount, saved: 0 });
+    setUsdAmount(0);
+    setName("");
   };
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-4">Create your Savings Plan</h2>
-      
-      {/* Total amount */}
-      <div className="mb-4">
-        <input
-          type="number"
-          placeholder="Total available amount"
-          className="p-2 border rounded"
-          value={totalAmount}
-          onChange={(e) => setTotalAmount(Number(e.target.value))}
-        />
-      </div>
-      
-      {/* Goal details */}
-      <div className="mb-4">
+      <h2 className="text-xl font-semibold text-[#00747a] mb-4">Create Savings Box</h2>
+
+      <div className="flex flex-col md:flex-row gap-4 mb-4">
         <input
           type="text"
-          placeholder="Goal Name (e.g., Travel)"
-          className="p-2 border rounded"
-          value={goalName}
-          onChange={(e) => setGoalName(e.target.value)}
+          value={name}
+          placeholder="Box name"
+          onChange={(e) => setName(e.target.value)}
+          className="flex-1 p-3 border border-[#0f9d91] rounded-lg"
         />
         <input
           type="number"
-          placeholder="Goal Amount"
-          className="p-2 border rounded ml-4"
-          value={goalAmount}
-          onChange={(e) => setGoalAmount(Number(e.target.value))}
+          value={usdAmount}
+          placeholder="USD"
+          onChange={(e) => setUsdAmount(Number(e.target.value))}
+          className="w-40 p-3 border border-[#3db8a0] rounded-lg"
         />
-        <button
-          onClick={handleAddGoal}
-          className="ml-4 p-2 bg-[#0F9D91] text-white rounded"
-        >
-          Add Goal
+        <button onClick={handleAdd} className="bg-[#3db8a0] text-white px-6 py-3 rounded-lg hover:bg-[#0f9d91] transition">
+          Add
         </button>
       </div>
 
-      {/* Display goals */}
-      <div className="mb-6">
-        <h3 className="font-semibold">Your Goals</h3>
-        {boxes.map((box, index) => (
-          <div key={index} className="flex justify-between items-center mb-2">
-            <span>{box.name}</span>
-            <span>{box.amount} sBTC</span>
+      {savingsBoxes?.length > 0 && (
+        <div className="mt-4">
+          <h3 className="font-semibold mb-2">Your Boxes</h3>
+          <div className="space-y-2">
+            {savingsBoxes.map((box, idx) => (
+              <div key={idx} className="flex justify-between items-center px-4 py-2 bg-white/70 rounded shadow border border-[#d4af37]">
+                <div>
+                  <p className="text-[#0f9d91] font-medium">{box.name}</p>
+                  <p>{box.amount} sBTC</p>
+                </div>
+                <button onClick={() => removeBox(box.name)} className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">
+                  Remove
+                </button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-
-      {/* Remaining Balance */}
-      <h4>Remaining Balance: {totalAmount} sBTC</h4>
+        </div>
+      )}
     </div>
   );
 };
