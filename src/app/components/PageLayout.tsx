@@ -142,7 +142,7 @@ export default function PageLayout({ children }: { children: ReactNode }) {
           </button>
           <button
             className="flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-white font-semibold text-lg rounded-full hover:shadow-xl transition-all duration-300 ease-in-out"
-            onClick={() => router.push("/software/networking")}
+            onClick={() => router.push("/software/MarketGarden")}
           >
             <CartIcon
               style={{ height: "20px", width: "20px", color: "#FFFFFF" }}
@@ -151,7 +151,7 @@ export default function PageLayout({ children }: { children: ReactNode }) {
           </button>
           <button
             className="flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-white font-semibold text-lg rounded-full hover:shadow-xl transition-all duration-300 ease-in-out"
-            onClick={() => router.push("/software/send")}
+            onClick={() => router.push("/software/Payments")}
           >
             <ReceiveIcon
               style={{ height: "20px", width: "20px", color: "#FFFFFF" }}

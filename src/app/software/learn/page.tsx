@@ -20,7 +20,7 @@ import {
 export default function LearnPage() {
   return (
     <>
-      <GardenScene zoom={0} theme="summer" />
+      <GardenScene zoom={0} theme="fall" />
       <PageLayout>
         <div className="mt-[100px] w-full max-w-5xl text-center px-4 md:px-0 animate-fade-in-slow">
           <h1 className="text-4xl md:text-5xl font-bold text-[#00747A] mb-8">

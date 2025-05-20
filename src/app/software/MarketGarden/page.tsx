@@ -16,7 +16,7 @@ export default function MarketGardenPage() {
 
   return (
     <>
-      <GardenScene zoom={0} theme="fall" />
+      <GardenScene zoom={0} theme="winter" />
       <PageLayout>
         <div className="mt-[120px] w-full max-w-5xl mx-auto text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-[#00747A] mb-6">

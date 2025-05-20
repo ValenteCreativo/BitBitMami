@@ -56,7 +56,7 @@ export default function Home() {
             { title: "Savings Plan", url: "/software/savings" },
             { title: "Learn Bitcoin", url: "/software/learn" },
             { title: "MarketGarden", url: "/software/MarketGarden" },
-            { title: "Send / Receive", url: "/software/send" },
+            { title: "Send / Receive", url: "/software/Payments" },
           ].map((link, index) => (
             <Link key={index} href={link.url}>
               <button className="px-8 py-4 rounded-full bg-[#3DB8A0] text-white font-semibold text-lg shadow-lg hover:bg-[#0F9D91] hover:shadow-xl hover:brightness-105 transition-all duration-300 ease-in-out">

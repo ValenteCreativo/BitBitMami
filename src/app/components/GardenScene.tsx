@@ -201,11 +201,11 @@ const GardenScene: React.FC<GardenSceneProps> = ({ zoom, theme = 'spring' }) => 
 
     const palettes: Record<string, string[]> = {
       spring: ["#77dd77", "#ffc0cb", "#b39ddb", "#d4af37"],
-      summer: ["#a8e6cf", "#3db8a0", "#00c2cb", "#c2f970", "#d7fcd4", "#f5fff0"],
+      summer: ["#a8e6cf", "#3db8a0", "#00c2cb", "#c2f970", "#f0f8c8", "#ffdf6e"],
       fall: ["#d2691e", "#cd5c5c", "#8b0000", "#f0c987"],
-      winter: ["#d0f0ff", "#b5e6f7", "#ffffff", "#ccf2ff", "#a7dbf7", "#8ecff9"],
-      night: ["#0f1b4c", "#00747a", "#3db8a0", "#000000"]
-    };
+      winter: ["#87cefa", "#b5e6f7", "#ffffff", "#a0c8e1", "#5fa3e5", "#74c1e2"], 
+      night: ["#232b49", "#00747a", "#3db8a0", "#2c2f3f"], 
+    };    
     const palette = palettes[theme] || palettes.spring;
     for (let i = 0; i < palette.length; i++) {
       splotch(100 + i * 80, 120 + i * 40, 100 - i * 15, palette[i]);

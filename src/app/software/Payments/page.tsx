@@ -6,7 +6,7 @@ import GardenScene from "@/app/components/GardenScene";
 export default function SendReceivePage() {
   return (
     <>
-      <GardenScene zoom={0} theme="winter" />
+      <GardenScene zoom={0} theme="night" />
       <PageLayout>
         <div className="mt-[120px] flex flex-col items-center justify-start text-center px-6 pb-20 animate-fade-in-slow">
           <h1 className="text-3xl md:text-4xl font-bold text-[#00747a] mb-6">
