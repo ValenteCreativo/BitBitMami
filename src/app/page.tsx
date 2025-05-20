@@ -55,7 +55,7 @@ export default function Home() {
           {[
             { title: "Savings Plan", url: "/software/savings" },
             { title: "Learn Bitcoin", url: "/software/learn" },
-            { title: "Circular Economy", url: "/software/networking" },
+            { title: "MarketGarden", url: "/software/MarketGarden" },
             { title: "Send / Receive", url: "/software/send" },
           ].map((link, index) => (
             <Link key={index} href={link.url}>
