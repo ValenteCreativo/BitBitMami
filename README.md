@@ -1,8 +1,8 @@
 # 🐇 BitBitMami
 
-**A Bitcoin-native toolkit to strengthen local circular economies through savings, education, collaboration, and real-world payments.**  
+**A Bitcoin-native toolkit to strengthen local circular economies through savings, education, collaboration, and real-world payments.**
 
-Built for the **Bitcoin 2025 Official Hackathon** using sBTC (Stacks), Rebar Shield, and Rebar Data.
+Built as a **Proof of Concept (MVP)** for the **Bitcoin 2025 Official Hackathon**, integrating sBTC (Stacks), Rebar Shield, Rebar Data, Mapbox, and the Bitcoin Design Foundation’s iconography.
 
 ![BitBitMami Logo](https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafybeiarejffeclu5prnvmtcbnb2v4dpdvqgx5j5nge27m25yja2pbsmja)
 
@@ -10,19 +10,19 @@ Built for the **Bitcoin 2025 Official Hackathon** using sBTC (Stacks), Rebar Shi
 
 ## 🌱 Problem
 
-Bitcoin is global — but its adoption often leaves out **small-scale entrepreneurs**, especially women and local businesses.  
-There’s a lack of simple, elegant tools to **plan, receive, and use Bitcoin** in a real-life context.
+Bitcoin is global — but its adoption often leaves out **small-scale entrepreneurs**, especially women and local businesses in LATAM.  
+There’s a lack of simple, intuitive tools to **save, learn, and transact with Bitcoin** in real-world, culturally grounded contexts.
 
 ---
 
 ## 🌸 Vision
 
-BitBitMami is a **gentle yet powerful onboarding journey** into the Bitcoin ecosystem — designed as a visual toolkit for:
+BitBitMami is a **gentle yet powerful onboarding journey** into Bitcoin’s ecosystem — designed as a **beautiful visual toolkit** for:
 
-- 👛 Planning your savings in Bitcoin
-- 📚 Learning interactively about how Bitcoin works
-- 🛍️ Joining a circular network of women-led businesses
-- 📲 Sending and receiving BTC with optional privacy
+- 👛 Planning savings with sBTC
+- 📚 Learning interactively about Bitcoin and MEV
+- 🛍️ Mapping women-led businesses that accept Bitcoin
+- 📲 Sending & receiving BTC with optional privacy via Rebar Shield
 
 ---
 
@@ -30,23 +30,27 @@ BitBitMami is a **gentle yet powerful onboarding journey** into the Bitcoin ecos
 
 | Module | Description |
 |--------|-------------|
-| **Savings Plan** | Visual tracker for goals using sBTC and programmable releases |
-| **Learn Bitcoin** | Interactive guides + real-time charts using Rebar Data |
-| **Entrepreneur Network** | Directory of businesses that accept Bitcoin (verified) |
-| **Send / Receive** | BTC transactions with optional **Rebar Shield** integration |
-| **Circular Insights** | Future dashboard for local BTC economic flows |
+| **Savings Plan** | Visual savings goals, vaults, and simulated yield logic via Stacks |
+| **Learn Bitcoin** | Tabbed onboarding content, charts, and MEV explainers using Rebar Data |
+| **Market Garden** | Interactive Mapbox directory of BTC-friendly businesses in LATAM & USA |
+| **Payments** | Send/receive Bitcoin with QR and Rebar Shield toggle |
+| **Bitcoin-native UI** | All modules use Bitcoin Design Foundation icons for consistent feel |
 
 ---
 
 ## 🧠 Tech Stack
 
-- 🌳 **Next.js 14 + App Router**
-- 🧩 **Three.js + Custom GardenScene** for emotional UI
-- 💸 **Stacks SDK** for sBTC savings logic
-- 🛡️ **Rebar Shield** for private transactions
-- 📊 **Rebar Data** for Bitcoin analytics and learning
-- 📍 **Leaflet + Recharts** (planned) for map and graph visualizations
-- 🎨 TailwindCSS for aesthetic coherence
+- 🌳 **Next.js 14 + App Router** for modern React architecture
+- 🧩 **Three.js + Custom GardenScene** for immersive UI transitions
+- 💸 **Stacks SDK (sBTC)** for programmable Bitcoin savings logic
+- 🛡️ **Rebar Shield** to simulate private mempool submissions
+- 📊 **Rebar Data** for BTC insights, MEV modeling & analytics
+- 🗺️ **Mapbox GL JS** for geographic business mapping
+- 🧠 **Zustand** for lightweight state management
+- 🎨 **TailwindCSS** for atomic design & responsive layout
+- 🪙 **react-qr-code** for payments via QR interaction
+- 🖼️ **Bitcoin Design Foundation Icons** for visual alignment with the Bitcoin ecosystem
+
 
 ---
 
@@ -71,13 +75,17 @@ Visit: http://localhost:3000
 
 ## ✨ Future Features (post-Hackathon)
 
--- 🌍 Map-based visualization of the network (Leaflet.js)
+--🌍 Enhanced business review system on the Market Garden map
 
--- 🧠 AI chatbot for Bitcoin education
+--🧠 GPT-powered Bitcoin mentor for beginners
 
--- 🪙 Tokenless reputation system
+--🪙 Reputation system with non-tokenized attestations
 
--- 📱 PWA mobile support for field usage
+--📱 Full PWA support for field usage in rural zones
+
+--🧪 Integration with live Rebar API when production key is granted
+
+--⚡ Real yield strategies connected to Stacks DeFi ecosystem
 
 ## 🙌 Team
 **Made from México with love 🇲🇽**
