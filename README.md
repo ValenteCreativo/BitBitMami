@@ -30,7 +30,7 @@ BitBitMami is a **gentle yet powerful onboarding journey** into Bitcoin’s ecos
 
 | Module | Description |
 |--------|-------------|
-| **Savings Plan** | Visual savings goals, vaults, and simulated yield logic via Stacks |
+| **Savings Plan** | Visual savings goals, vaults, and simulated yield logic via Stacks and SBTC|
 | **Learn Bitcoin** | Tabbed onboarding content, charts, and MEV explainers using Rebar Data |
 | **Market Garden** | Interactive Mapbox directory of BTC-friendly businesses in LATAM & USA |
 | **Payments** | Send/receive Bitcoin with QR and Rebar Shield toggle |

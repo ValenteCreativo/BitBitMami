@@ -20,7 +20,7 @@ export default function MarketGardenPage() {
       <PageLayout>
         <div className="mt-[120px] w-full max-w-5xl mx-auto text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-[#00747A] mb-6">
-            Market Garden
+            MarketGarden
           </h1>
           <p className="text-[#0F9D91] mb-6">
             Discover local and digital businesses that accept Bitcoin — and register your own to join the network.
