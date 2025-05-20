@@ -8,7 +8,7 @@ const LearnInsights = () => {
         <li>🧱 Blocks are mined approximately every 10 minutes</li>
         <li>🪙 Each block currently gives 3.125 BTC as a reward (post-halving)</li>
         <li>🛰️ Bitcoin nodes verify the entire chain for trustless validation</li>
-        <li>📦 UTXOs (Unspent Outputs) are Bitcoin's state model</li>
+        <li>📦 UTXOs (Unspent Outputs) are Bitcoin&apos;s state model</li>
         <li>🛡️ Rebar Shield enables private transaction submission to miners</li>
       </ul>
     </section>

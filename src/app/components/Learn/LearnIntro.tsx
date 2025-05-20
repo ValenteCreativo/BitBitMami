@@ -5,7 +5,7 @@ const LearnIntro = () => {
     <section className="bg-white/70 p-6 rounded-xl shadow-md backdrop-blur mb-12 text-left max-w-3xl mx-auto">
       <h2 className="text-3xl font-bold text-[#00747A] mb-4">Why Learn Bitcoin?</h2>
       <p className="text-[#0F9D91] mb-4 leading-relaxed">
-        Bitcoin is more than a currency — it's a new way to save, send, and grow money without relying on banks or borders.
+        Bitcoin is more than a currency — it&apos;s a new way to save, send, and grow money without relying on banks or borders.
         In this space, women and communities in Latin America can build circular economies using technology that puts them in control.
       </p>
 
@@ -22,7 +22,7 @@ const LearnIntro = () => {
       </ul>
 
       <p className="text-[#0F9D91] italic">
-        Whether you're new to crypto or already stacking sats, this space is designed for you — clear, visual, and empowering.
+        Whether you&apos;re new to crypto or already stacking sats, this space is designed for you — clear, visual, and empowering.
       </p>
     </section>
   );

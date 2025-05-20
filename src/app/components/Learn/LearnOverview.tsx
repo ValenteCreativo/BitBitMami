@@ -17,7 +17,7 @@ const LearnOverview = () => {
 
       <h2 className="text-2xl font-bold text-[#00747A]">Why Rebar?</h2>
       <p className="text-[#0F9D91]">
-        Rebar Labs provides direct access to Bitcoin's data layer and transaction flows, empowering developers to build MEV-aware apps,
+        Rebar Labs provides direct access to Bitcoin&apos;s data layer and transaction flows, empowering developers to build MEV-aware apps,
         simulate execution, and optimize on-chain logic with high-fidelity RPC and API services.
       </p>
     </section>
