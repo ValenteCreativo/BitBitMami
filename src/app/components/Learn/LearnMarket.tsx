@@ -13,7 +13,7 @@ const LearnMarket = () => {
       <ul className="list-disc list-inside text-[#3DB8A0]">
         <li>💰 Total supply is limited: 21M</li>
         <li>📉 Price adjusts every minute</li>
-        <li>🧮 You can own a fraction (called "sats")</li>
+        <li>🧮 You can own a fraction (called &quot;sats&quot;)</li>
         <li>🔐 Every transaction is public and secured by cryptography</li>
       </ul>
     </div>
