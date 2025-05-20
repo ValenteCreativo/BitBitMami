@@ -4,7 +4,25 @@ interface TxData {
   hex: string; // Raw hex transaction
 }
 
-export const fetchPaymentInfo = async (): Promise<any> => {
+interface PaymentInfo {
+  pool: string;
+  relay: string;
+  version: string;
+  // Puedes expandir esto si conoces más claves en la respuesta
+}
+
+interface RpcResponse {
+  result?: string;
+  error?: { code: number; message: string };
+  id: string;
+}
+
+interface TxStatusResponse {
+  status: string;
+  found: boolean;
+}
+
+export const fetchPaymentInfo = async (): Promise<PaymentInfo> => {
   const response = await fetch("https://shield.rebarlabs.io/v1/info", {
     method: "GET",
     headers: {
@@ -12,11 +30,11 @@ export const fetchPaymentInfo = async (): Promise<any> => {
     },
   });
 
-  const data = await response.json();
+  const data: PaymentInfo = await response.json();
   return data;
 };
 
-export const sendTransactionToPool = async (txData: TxData): Promise<any> => {
+export const sendTransactionToPool = async (txData: TxData): Promise<RpcResponse> => {
   const response = await fetch("https://shield.rebarlabs.io/v1/rpc", {
     method: "POST",
     headers: {
@@ -30,11 +48,11 @@ export const sendTransactionToPool = async (txData: TxData): Promise<any> => {
     }),
   });
 
-  const data = await response.json();
+  const data: RpcResponse = await response.json();
   return data;
 };
 
-export const getTransactionStatus = async (txid: string): Promise<any> => {
+export const getTransactionStatus = async (txid: string): Promise<TxStatusResponse> => {
   const response = await fetch(`https://shield.rebarlabs.io/v1/txstatus?txid=${txid}`, {
     method: "GET",
     headers: {
@@ -42,6 +60,6 @@ export const getTransactionStatus = async (txid: string): Promise<any> => {
     },
   });
 
-  const data = await response.json();
+  const data: TxStatusResponse = await response.json();
   return data;
 };
