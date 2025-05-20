@@ -1,10 +1,15 @@
 "use client";
 
-const ConceptCard = ({ title, description }: { title: string, description: string }) => {
+interface ConceptCardProps {
+  title: string;
+  description: string;
+}
+
+const ConceptCard = ({ title, description }: ConceptCardProps) => {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg mb-6 w-full max-w-md">
-      <h3 className="text-xl font-semibold text-[#00747a] mb-3">{title}</h3>
-      <p className="text-md text-[#3DB8A0]">{description}</p>
+    <div className="bg-white/70 backdrop-blur-md p-6 rounded-xl shadow-md border-l-4 border-[#D4AF37] text-left">
+      <h3 className="text-xl font-bold text-[#0F9D91] mb-2">{title}</h3>
+      <p className="text-[#3DB8A0] leading-relaxed">{description}</p>
     </div>
   );
 };

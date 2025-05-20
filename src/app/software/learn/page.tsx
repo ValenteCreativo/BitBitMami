@@ -1,59 +1,84 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { fetchRebarData } from "@/app/Utils/rebar/rebarAPI"; // Importa las funciones para interactuar con Rebar
-import PageLayout from "@/app/components/PageLayout";
 import GardenScene from "@/app/components/GardenScene";
-import PriceCard from "@/app/components/Learn/PriceCard"; // Componente para mostrar el precio
-import ConceptCard from "@/app/components/Learn/ConceptCard"; // Componente para conceptos educativos
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts"; // Gráficos
+import PageLayout from "@/app/components/PageLayout";
+import LearnIntro from "@/app/components/Learn/LearnIntro";
+import LearnRebarStats from "@/app/components/Learn/LearnRebarStats";
+import LearnInsights from "@/app/components/Learn/LearnInsights";
+import LearnMEVSim from "@/app/components/Learn/LearnMEVSim";
+
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+import {
+  InfoIcon,
+  PieChartIcon,
+  VerifyIcon,
+  ShieldIcon,
+} from "@bitcoin-design/bitcoin-icons-react/outline";
+
 
 export default function LearnPage() {
-  const [data, setData] = useState<any>({ price: 0, marketCap: 0, priceHistory: [] });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      // Obtener el precio de Bitcoin desde Rebar
-      const fetchedData = await fetchRebarData("bitcoin/price");
-      setData(fetchedData);
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <>
-      <GardenScene zoom={0} theme="spring" />
+      <GardenScene zoom={0} theme="summer" />
       <PageLayout>
-        <div className="mt-[120px] flex flex-col items-center justify-start text-center px-6 pb-20 animate-fade-in-slow">
-          <h1 className="text-3xl md:text-4xl font-bold text-[#00747a] mb-6">Learn Bitcoin</h1>
+        <div className="mt-[100px] w-full max-w-5xl text-center px-4 md:px-0 animate-fade-in-slow">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#00747A] mb-8">
+            Learn Bitcoin
+          </h1>
+          <p className="text-[#0F9D91] text-lg mb-12 max-w-2xl mx-auto">
+            Understand how Bitcoin empowers you — from simple savings to advanced DeFi with Rebar tools.
+          </p>
 
-          {/* Conceptos */}
-          <div className="mb-12">
-            <ConceptCard title="What is Bitcoin?" description="Bitcoin is a decentralized digital currency..." />
-            <ConceptCard title="Bitcoin Mining" description="Bitcoin mining is the process of..." />
-          </div>
+          {/* Tabs for learning sections */}
+          <div className="bg-white/50 backdrop-blur-md p-6 rounded-2xl shadow-xl">
+            <Tabs>
+            <TabList className="flex flex-wrap justify-center gap-4 mb-8">
+  <Tab className="flex items-center gap-2 text-sm font-semibold text-[#0F9D91] px-5 py-2 rounded-full bg-[#f0fdfa] hover:bg-[#D4AF37] hover:text-white cursor-pointer transition-all duration-300">
+    <InfoIcon style={{ width: 20, height: 20 }} /> Intro
+  </Tab>
+  <Tab className="flex items-center gap-2 text-sm font-semibold text-[#0F9D91] px-5 py-2 rounded-full bg-[#f0fdfa] hover:bg-[#D4AF37] hover:text-white cursor-pointer transition-all duration-300">
+    <PieChartIcon style={{ width: 20, height: 20 }} /> Market Stats
+  </Tab>
+  <Tab className="flex items-center gap-2 text-sm font-semibold text-[#0F9D91] px-5 py-2 rounded-full bg-[#f0fdfa] hover:bg-[#D4AF37] hover:text-white cursor-pointer transition-all duration-300">
+    <VerifyIcon style={{ width: 20, height: 20 }} /> Insights
+  </Tab>
+  <Tab className="flex items-center gap-2 text-sm font-semibold text-[#0F9D91] px-5 py-2 rounded-full bg-[#f0fdfa] hover:bg-[#D4AF37] hover:text-white cursor-pointer transition-all duration-300">
+    <ShieldIcon style={{ width: 20, height: 20 }} /> MEV & Shield
+  </Tab>
+</TabList>
 
-          {/* Mostrar el precio de Bitcoin y estadísticas */}
-          <div className="flex gap-6 mb-8">
-            <PriceCard title="Bitcoin Price" value={`$${data?.price || 0}`} />
-            <PriceCard title="Market Cap" value={`$${data?.marketCap || 0}`} />
-          </div>
-
-          {/* Gráficos interactivos */}
-          <div className="mb-12">
-            <h2 className="text-xl font-semibold mb-4">Bitcoin Price Chart</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={data?.priceHistory || []}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="time" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="price" stroke="#0F9D91" />
-              </LineChart>
-            </ResponsiveContainer>
+              <TabPanel>
+                <LearnIntro />
+              </TabPanel>
+              <TabPanel>
+                <LearnRebarStats />
+              </TabPanel>
+              <TabPanel>
+                <LearnInsights />
+              </TabPanel>
+              <TabPanel>
+                <LearnMEVSim />
+              </TabPanel>
+            </Tabs>
           </div>
         </div>
+
+        <style jsx global>{`
+          @keyframes fade-in-slow {
+            from {
+              opacity: 0;
+              transform: translateY(-10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          .animate-fade-in-slow {
+            animation: fade-in-slow 1.4s ease-out forwards;
+          }
+        `}</style>
       </PageLayout>
     </>
   );
