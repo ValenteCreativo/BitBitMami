@@ -147,7 +147,7 @@ export default function PageLayout({ children }: { children: ReactNode }) {
             <CartIcon
               style={{ height: "20px", width: "20px", color: "#FFFFFF" }}
             />
-            Circular Economy
+            MarketGarden
           </button>
           <button
             className="flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-white font-semibold text-lg rounded-full hover:shadow-xl transition-all duration-300 ease-in-out"
